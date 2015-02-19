@@ -1,0 +1,20 @@
+require './dep.rb'
+
+
+def method_from_ralefile
+
+puts "It's a rake file method" 
+
+
+end
+
+
+task :a do
+puts "task a"
+end
+
+
+task :b do
+
+puts "task b"
+end
