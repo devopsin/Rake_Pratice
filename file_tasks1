@@ -1,0 +1,5 @@
+file 'settings.yml' => 'settings.yaml' do
+
+mv 'settings.yaml', 'settings.yml'
+
+end
