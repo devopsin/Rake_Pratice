@@ -1,38 +1,40 @@
-=begin
-++++++++++++++++this is not working so keeping in Comment
+task :clean do
 
-#require './dep.rb'
-include './dep.rb'
-
-
-def method_from_ralefile
-
-puts "It's a rake file method" 
-
+puts "cleaning some data ............."
 
 end
 
 
-task :a do
-puts "task a"
+task :process do 
+
+puts "Processing some data ......"
+
+Rake::Task['clean'].invoke
+
 end
 
 
-task :b do
+task :process_with_double_clean do
 
-puts "task b"
+puts "Processing some data with double clean ......"
+
+Rake::Task['clean'].invoke
+
+Rake::Task['clean'].invoke
+
 end
 
-=end
 
-task 'dep.rb' do
+task :process_with_double_clean_with_reenable do
+
+puts "Processing some data with double clean with reenable......"
+
+Rake::Task['clean'].invoke
+
+Rake::Task['clean'].reenable
+
+Rake::Task['clean'].invoke
+
+end
 
 
-sh %Q{echo "puts 'Hello from dep.rb file'" > dep.rb}
-
-end 
-
-
-task :hello => 'dep.rb'
-
-import 'dep.rb'
