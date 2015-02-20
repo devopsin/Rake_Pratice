@@ -1,8 +1,12 @@
 # Rake_Pratice
 Practicing rake automation
+
 I praticing Rake automation on UBUNTU 
+
 Before do rake automation here is simple  steps to do pratice
+
 Here is the process for installing Ruby on UBUNTU:
+
 sudo apt-get install ruby
 
 checnking:
