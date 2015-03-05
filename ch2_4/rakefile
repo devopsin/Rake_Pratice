@@ -1,0 +1,15 @@
+task :default => 'my_gem/tests/fixtures'
+
+file 'my_gem' do |t| mkdir t.name end
+
+#=begin
+file 'my_gem/tests' => ['my_gem'] do |t| 
+mkdir t.name 
+
+end
+
+file 'my_gem/tests/fixtures' => ['my_gem/tests'] do |t|
+ mkdir t.name
+end
+
+
