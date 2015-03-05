@@ -1,0 +1,16 @@
+task :copy_src => [:prepare_for_copy] do
+ puts 'In the #copy_src'
+end
+
+task :copy_bin => [:prepare_for_copy] do
+ puts 'In the #copy_bin'
+end
+
+task :prepare_for_copy do
+ puts 'In the #prepare_for_copy'
+end
+
+
+multitask :all_copy => [:copy_src, :copy_bin] do
+ puts 'In the #all_copy'
+end
