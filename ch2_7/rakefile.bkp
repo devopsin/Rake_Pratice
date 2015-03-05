@@ -1,0 +1,11 @@
+task :task1 do
+ puts 'Action of task 1'
+end
+
+task :task2 do
+ puts 'Action of task 2'
+end
+
+multitask :task3 => [:task1, :task2] do
+ puts 'Action of task 3'
+end

@@ -1,0 +1,11 @@
+task :set_a do
+ @a = 2
+end
+
+task :set_b do
+  @b = 3 + @a
+end
+
+multitask :sum => [:set_a, :set_b] do
+ puts "@b = #{@b}"
+end
