@@ -1,0 +1,25 @@
+file 'my_gem' do |t| mkdir t.name end
+file 'my_gem/test' => ['my_gem'] do |t| mkdir t.name end
+
+=begin
+file 'my_gem/test/fixtures' => ['my_gem/test/fixtures'] do |t| 
+
+
+
+
+mkdir t.name 
+
+
+end
+
+
+
+=end
+
+
+file 'my_gem/test/rajiv' => ['my_gem/test'] do |t| 
+
+mkdir t.name 
+
+end
+

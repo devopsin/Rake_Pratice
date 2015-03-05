@@ -1,0 +1,40 @@
+task :clean do
+
+puts "cleaning some data ............."
+
+end
+
+
+task :process do 
+
+puts "Processing some data ......"
+
+Rake::Task['clean'].invoke
+
+end
+
+
+task :process_with_double_clean do
+
+puts "Processing some data with double clean ......"
+
+Rake::Task['clean'].invoke
+
+Rake::Task['clean'].invoke
+
+end
+
+
+task :process_with_double_clean_with_reenable do
+
+puts "Processing some data with double clean with reenable......"
+
+Rake::Task['clean'].invoke
+
+Rake::Task['clean'].reenable
+
+Rake::Task['clean'].invoke
+
+end
+
+

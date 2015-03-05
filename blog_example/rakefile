@@ -1,0 +1,49 @@
+task :default => 'blog.html'
+
+task 'ar1icle1.html' => 'ar1icle1.md' do
+ 
+  sh 'pandoc -s ar1icle1.md -o ar1icle1.html'
+
+end
+
+task 'ar1icle2.html' => 'ar1icle2.md' do
+
+  sh 'pandoc -s ar1icle2.md -o ar1icle2.html'
+
+end
+
+task 'blog.html' => ['ar1icle1.html', 'ar1icle2.html'] do
+
+File.open('blog.html','w') do |f|
+html = <<-EOS
+<!DOCTYPE html>
+<html>
+<head>
+<title> Rake Essential </title>
+
+</head>
+
+<body>
+<a href='ar1icle1.html'> ar1icle 1 </a> <br />
+<a href='ar1icle2.html'> ar1icle 2 </a> <br />
+
+</body>
+
+</html>
+
+
+
+EOS
+f.write(html)
+end
+
+end
+
+
+
+
+ 
+#ar1icle1.md  ar1icle2.md
+
+
+

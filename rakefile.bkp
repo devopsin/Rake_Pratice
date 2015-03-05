@@ -1,0 +1,38 @@
+=begin
+++++++++++++++++this is not working so keeping in Comment
+
+#require './dep.rb'
+include './dep.rb'
+
+
+def method_from_ralefile
+
+puts "It's a rake file method" 
+
+
+end
+
+
+task :a do
+puts "task a"
+end
+
+
+task :b do
+
+puts "task b"
+end
+
+=end
+
+task 'dep.rb' do
+
+
+sh %Q{echo "puts 'Hello from dep.rb file'" > dep.rb}
+
+end 
+
+
+task :hello => 'dep.rb'
+
+import 'dep.rb'

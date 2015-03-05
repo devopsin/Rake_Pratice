@@ -1,0 +1,25 @@
+def dep_tasks
+
+[:t1, :t2]
+
+end
+
+task :t1 do
+
+puts "in task t1"
+
+end
+
+
+task :t2 do
+
+puts "in task t2"
+
+end
+
+
+task :t3 => dep_tasks {
+
+puts "In task t3"
+
+}
