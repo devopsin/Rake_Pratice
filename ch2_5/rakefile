@@ -1,0 +1,34 @@
+require_relative 'blog_generator'
+
+=begin
+
+articles = ['article1', 'article2']
+require_relative 'blog_generator'
+
+=end
+#code replacementby using FileUtils and FileLists
+
+articles = Rake::FileList.new('**/*.md', '**/*.markdown') do |files|
+ files.exclude('~*')
+ files.exclude(/^temp.+\//)
+ files.exclude do |file|
+# File.zero?(file)
+ end
+ end
+
+
+task :default => 'blog.html'
+
+articles.ext.each do |article|
+ file "#{article}.html" => "#{article}.md" do
+ sh "pandoc -s #{article}.md -o #{article}.html"
+ end
+end
+
+
+
+FileUtils.rm('blog.html', force: true)
+
+file 'blog.html' => articles.ext.map { |a| "#{a}.html" } do |t|
+ BlogGenerator.new(t).perform
+end
