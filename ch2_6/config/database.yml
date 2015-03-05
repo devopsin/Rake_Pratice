@@ -1,0 +1,25 @@
+---
+production:
+  adapter: postgresql
+  encoding: unicode
+  username: !binary |-
+    cmFqZWV2cmVkZHk=
+  pool: 5
+  password: 
+  database: ch2_6_production
+development:
+  adapter: postgresql
+  encoding: unicode
+  username: !binary |-
+    cmFqZWV2cmVkZHk=
+  pool: 5
+  password: 
+  database: ch2_6_development
+test:
+  adapter: postgresql
+  encoding: unicode
+  username: !binary |-
+    cmFqZWV2cmVkZHk=
+  pool: 5
+  password: 
+  database: ch2_6_test

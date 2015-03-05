@@ -1,0 +1,40 @@
+require 'yaml'
+
+desc 'Generates database.yml, optional arguments: [adapter, user, password]'
+
+task :dbconfig => 'database.yml'
+
+file 'database.yml', [:adapter, :username, :password] do |t, args|
+ Dir.chdir('config')
+ args.with_defaults(:project_path => Dir.pwd)
+ DBConfigGenerator.new(t, args).generate
+end
+
+
+class DBConfigGenerator
+ ENVIRONMENTS = %w(production development test)
+ DEFAULTS = {
+ 'adapter' => 'postgresql',
+ 'encoding' => 'unicode',
+ 'username' => Etc.getlogin,
+ 'pool' => 5,
+ 'password' => nil
+ }
+ def initialize(task, options = {})
+ @database_pattern = "#{options[:project_path].pathmap('%-1d')}_%s"
+ @template = {}
+ @output_file = task.name
+ @defaults = DEFAULTS.tap do |defaults|
+   
+   defaults.each_key do |k|
+ defaults[k] = options[k] if options[k]
+ end
+ end
+ end
+ def generate
+ ENVIRONMENTS.each do |env|
+ @template[env] = @defaults.merge('database' => @database_pattern% env)
+ end
+ File.write(@output_file, @template.to_yaml)
+ end
+end
