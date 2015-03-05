@@ -1,0 +1,23 @@
+require_relative 'blog_generator'
+
+
+articles = ['article1', 'article2']
+require_relative 'blog_generator'
+
+
+articles = ['article1', 'article2']
+
+task :default => 'blog.html'
+
+articles.each do |article|
+ file "#{article}.html" => "#{article}.md" do
+ sh "pandoc -s #{article}.md -o #{article}.html"
+ end
+end
+
+
+
+FileUtils.rm('blog.html', force: true)
+file 'blog.html' => articles.map { |a| "#{a}.html" } do |t|
+ BlogGenerator.new(t).perform
+end

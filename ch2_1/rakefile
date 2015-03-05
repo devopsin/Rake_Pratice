@@ -1,0 +1,32 @@
+task :default => 'blog.html'
+
+file 'article1.html' => 'article1.md' do
+ sh 'pandoc -s article1.md -o article1.html'
+end
+
+
+
+file 'article2.html' => 'article2.md' do
+ sh 'pandoc -s article2.md -o article2.html'
+end
+
+
+
+file 'blog.html' => ['article1.html', 'article2.html'] do
+ File.open('blog.html', 'w') do |f|
+ html = <<-EOS
+       <!DOCTYPE html>
+       <html>
+       <head>
+       <title>Rake essential</title>
+       </head>
+       <body>
+       <a href='article1.html'>Article 1</a> <br />
+       <a href='article2.html'>Article 2</a>
+       </body>
+       </html>
+       EOS
+
+f.write(html)
+ end
+end

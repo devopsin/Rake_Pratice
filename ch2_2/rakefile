@@ -1,0 +1,36 @@
+task :default => 'blog.html'
+
+
+articles = ['article1', 'article2']
+
+
+articles.each do |article|
+ file "#{article}.html" => "#{article}.md" do
+ sh "pandoc -s #{article}.md -o #{article}.html"
+ end
+  
+end
+file 'blog.html' => articles.map { |a| "#{a}.html" } do
+ File.open('blog.html', 'w') do |f|
+ article_links = articles.map do |article|
+ <<-EOS
+ <a href='#{article}.html'>
+ Article #{article.match(/\d+$/)}
+ </a>
+ EOS
+ end
+
+html = <<-EOS
+ <!DOCTYPE html>
+ <html>
+ <head>
+ <title>Rake essential</title>
+ </head>
+ <body>
+ #{article_links.join('<br />')}
+ </body>
+ </html>
+ EOS
+ f.write(html)
+ end
+end
